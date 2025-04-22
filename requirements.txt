@@ -9,3 +9,4 @@ shap
 lime
 reportlab
 haversine
+joblib

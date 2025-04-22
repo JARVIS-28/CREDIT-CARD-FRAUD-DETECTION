@@ -1,84 +1,64 @@
 # Credit Card Fraud Detection
 
-## Objective
-
-The objective of this project is to build a machine learning model that can distinguish fraudulent credit card transactions from legitimate ones.
-
-## Dataset
-
-The dataset used for this project can be found on Kaggle:
-[https://www.kaggle.com/datasets/kartik2112/fraud-detection](https://www.kaggle.com/datasets/kartik2112/fraud-detection)
-
-It contains transaction details such as amount, user ID, merchant information, timestamps, etc.
+## Overview
+This project builds a machine learning pipeline to detect fraudulent credit card transactions using advanced feature engineering, class imbalance handling, and model explainability.
 
 ## Project Structure
-
 ```
-credit-card-fraud-detection/
+CREDIT-CARD-FRAUD-DETECTION/
 │
-├── data/                    # Raw dataset (fraudTest.csv, fraudTrain.csv)
-├── notebooks/               # Jupyter notebooks for EDA & modeling (EDA.ipynb)
-├── src/                     # Python scripts for modular code (preprocessing.py, model.py)
-├── results/                 # Plots, reports
+├── data/                    # Raw and processed datasets (fraudTrain.csv, fraudTest.csv, processed_fraudTrain.csv, processed_fraudTest.csv)
+├── notebooks/               # Jupyter notebooks for EDA, preprocessing, and model training (growthLink.ipynb)
+├── results/                 # Model artifacts (e.g., xgb_model.pkl, rf_model.pkl, logreg_model.pkl)
+├── requirements.txt         # Python dependencies
+├── xgboost_predict.py       # Script for making predictions using the XGBoost model
 ├── README.md
-├── requirements.txt
-└── main.py
 ```
 
-## Installation
+## Workflow
 
-1. Clone the repository:
-   ```bash
-   git clone <your-repository-url>
-   cd credit-card-fraud-detection
-   ```
-2. Install the required dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+1. **Exploratory Data Analysis, Preprocessing, and Model Training:**
+   - Use `notebooks/growthLink.ipynb` to:
+     - Analyze the data (EDA)
+     - Preprocess and engineer features
+     - Handle class imbalance
+     - Train and evaluate multiple models (Logistic Regression, Random Forest, XGBoost, etc.)
+     - Save processed datasets (`processed_fraudTrain.csv`, `processed_fraudTest.csv`) and trained model files (e.g., `xgb_model.pkl`)
 
-## How to Run
+2. **Prediction:**
+   - Use `xgboost_predict.py` to:
+     - Load a trained XGBoost model and processed test data
+     - Run predictions and print evaluation metrics (classification report, confusion matrix, ROC-AUC)
 
-1.  **Exploratory Data Analysis (Optional):**
-    Open and run the `notebooks/EDA.ipynb` notebook using Jupyter Lab, Jupyter Notebook, or VS Code.
+   - Example:
+     ```bash
+     python xgboost_predict.py
+     ```
 
-2.  **Run the main training and evaluation pipeline:**
-    Execute `main.py` from your terminal within the project's root directory.
+## Key Features
+- **All-in-one Notebook:**
+  - EDA, preprocessing, feature engineering, model training, and evaluation in `growthLink.ipynb`
+- **Processed Data and Models:**
+  - Outputs processed CSVs and model `.pkl` files for easy reuse
+- **Prediction Script:**
+  - Simple script for running predictions and evaluating the XGBoost model
 
-    *   **Basic Run (uses default Logistic Regression, runs preprocessing):**
-        ```bash
-        python main.py
-        ```
+## Requirements
+Install dependencies with:
+```bash
+pip install -r requirements.txt
+```
 
-    *   **Specify Model Type (e.g., XGBoost):**
-        ```bash
-        python main.py --model_type xgboost
-        ```
-        Available models: `logistic_regression`, `random_forest`, `xgboost`, `gradient_boosting`.
+## Usage Example
+```bash
+# Run all steps in the notebook (EDA, preprocessing, training, evaluation)
+# Save processed data and models
 
-    *   **Use Pre-processed Data (if available):**
-        Add the `--use_processed_data` flag to skip the preprocessing step and load from `data/*_processed.csv`.
-        ```bash
-        python main.py --model_type random_forest --use_processed_data
-        ```
+# Run prediction script for XGBoost
+python xgboost_predict.py
+```
 
-    *   **Generate SHAP Explanations:**
-        Add the `--explain` flag to generate SHAP summary and force plots after evaluation.
-        ```bash
-        python main.py --model_type xgboost --explain --use_processed_data
-        ```
-
-3.  **Check Results:**
-    Find evaluation metrics (`.txt`), plots (`.png`), and the saved model (`.joblib`) in the `results/` directory, named according to the model type used.
-
-## Expected Outcome
-
-A fraud detection system that minimizes false positives while maximizing fraud detection accuracy. The project will also include an analysis of misclassifications using explainability techniques.
-
-## Metrics Summary
-
-*(To be filled in after model evaluation)*
-
-## Sample Outputs/Plots
-
-*(To be added after running the analysis and model training)*
+## Notes
+- The target column is `is_fraud` (1: fraud, 0: non-fraud).
+- The pipeline is designed for extensibility and can be adapted for new features or models.
+- You can adapt `xgboost_predict.py` for other models by changing the model path and file names.
