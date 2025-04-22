@@ -8,7 +8,7 @@ This project builds a machine learning pipeline to detect fraudulent credit card
 CREDIT-CARD-FRAUD-DETECTION/
 │
 ├── data/                    # Raw and processed datasets (fraudTrain.csv, fraudTest.csv, processed_fraudTrain.csv, processed_fraudTest.csv)
-├── notebooks/               # Jupyter notebooks for EDA, preprocessing, and model training (growthLink.ipynb)
+├── notebooks/               # Jupyter notebooks for EDA, preprocessing, and model training (growthLink.ipynb, EDA.ipynb)
 ├── results/                 # Model artifacts (e.g., xgb_model.pkl, rf_model.pkl, logreg_model.pkl)
 ├── requirements.txt         # Python dependencies
 ├── xgboost_predict.py       # Script for making predictions using the XGBoost model
@@ -17,15 +17,21 @@ CREDIT-CARD-FRAUD-DETECTION/
 
 ## Workflow
 
-1. **Exploratory Data Analysis, Preprocessing, and Model Training:**
-   - Use `notebooks/growthLink.ipynb` to:
+1. **Exploratory Data Analysis:**
+   - Use `notebooks/EDA.ipynb` to:
      - Analyze the data (EDA)
+     - Visualize distributions and correlations
+     - Understand class imbalance and feature relationships
+
+2. **Preprocessing, Model Training, and Evaluation:**
+   - Use `notebooks/growthLink.ipynb` to:
      - Preprocess and engineer features
      - Handle class imbalance
      - Train and evaluate multiple models (Logistic Regression, Random Forest, XGBoost, etc.)
      - Save processed datasets (`processed_fraudTrain.csv`, `processed_fraudTest.csv`) and trained model files (e.g., `xgb_model.pkl`)
+     - Summarize which model to use based on evaluation metrics
 
-2. **Prediction:**
+3. **Prediction:**
    - Use `xgboost_predict.py` to:
      - Load a trained XGBoost model and processed test data
      - Run predictions and print evaluation metrics (classification report, confusion matrix, ROC-AUC)
@@ -34,14 +40,17 @@ CREDIT-CARD-FRAUD-DETECTION/
      ```bash
      python xgboost_predict.py
      ```
-
+     
 ## Key Features
-- **All-in-one Notebook:**
-  - EDA, preprocessing, feature engineering, model training, and evaluation in `growthLink.ipynb`
+- **Separation of EDA and Modeling:**
+  - EDA in `EDA.ipynb`, full pipeline in `growthLink.ipynb`
 - **Processed Data and Models:**
   - Outputs processed CSVs and model `.pkl` files for easy reuse
 - **Prediction Script:**
   - Simple script for running predictions and evaluating the XGBoost model
+  **Model Explainability:**
+  - SHAP values are used to interpret XGBoost model predictions.
+  - Visualizations show which features contribute to fraud detection and misclassifications.
 
 ## Requirements
 Install dependencies with:
@@ -51,8 +60,11 @@ pip install -r requirements.txt
 
 ## Usage Example
 ```bash
-# Run all steps in the notebook (EDA, preprocessing, training, evaluation)
-# Save processed data and models
+# Run EDA
+# (Open and run notebooks/EDA.ipynb in Jupyter or Colab)
+
+# Run preprocessing, training, and evaluation
+# (Open and run notebooks/growthLink.ipynb in Jupyter or Colab)
 
 # Run prediction script for XGBoost
 python xgboost_predict.py
