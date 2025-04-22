@@ -40,7 +40,7 @@ CREDIT-CARD-FRAUD-DETECTION/
      ```bash
      python xgboost_predict.py
      ```
-     
+
 ## Key Features
 - **Separation of EDA and Modeling:**
   - EDA in `EDA.ipynb`, full pipeline in `growthLink.ipynb`
@@ -48,7 +48,7 @@ CREDIT-CARD-FRAUD-DETECTION/
   - Outputs processed CSVs and model `.pkl` files for easy reuse
 - **Prediction Script:**
   - Simple script for running predictions and evaluating the XGBoost model
-  **Model Explainability:**
+- **Model Explainability:**
   - SHAP values are used to interpret XGBoost model predictions.
   - Visualizations show which features contribute to fraud detection and misclassifications.
 
